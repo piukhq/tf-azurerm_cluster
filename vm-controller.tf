@@ -73,4 +73,8 @@ resource "azurerm_linux_virtual_machine" "controller" {
             bastion_private_key = file("~/.ssh/id_bink_azure_terraform")
         }
     }
+
+    lifecycle {
+        ignore_changes = [source_image_reference]
+    }
 }
