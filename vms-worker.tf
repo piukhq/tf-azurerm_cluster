@@ -18,12 +18,6 @@ variable "pod_ip_configs" {
 
 locals {
     ubuntu_image = {
-        "16.04" = [{
-            publisher = "Canonical"
-            offer = "UbuntuServer"
-            sku = "16.04-LTS"
-            version = "latest"
-        }],
         "20.04" = [{
             publisher = "Canonical"
             offer = "0001-com-ubuntu-server-focal"
@@ -32,7 +26,6 @@ locals {
         }]
     }
     ubuntu_metadata = {
-        "16.04" = null
         "20.04" = "I2Nsb3VkLWNvbmZpZwoKd3JpdGVfZmlsZXM6Ci0gY29udGVudDogfAogICAgZGF0YXNvdXJjZToKICAgICAgQXp1cmU6CiAgICAgICAgYXBwbHlfbmV0d29ya19jb25maWc6IGZhbHNlCiAgb3duZXI6IHJvb3Q6cm9vdAogIHBhdGg6IC9ldGMvY2xvdWQvY2xvdWQuY2ZnLmQvODBfYXp1cmVfbmV0X2NvbmZpZy5jZmcKICBwZXJtaXNzaW9uczogJzA2NDAnCg=="
     }
 }
