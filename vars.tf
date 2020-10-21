@@ -37,12 +37,12 @@ variable additional_firewall_rules {
 
 variable bifrost_version {
     type = string
-    default = "4.0.0"
+    default = "4.2.1"
 }
 
 variable ubuntu_version {
     type = string
-    default = "16.04"
+    default = "20.04"
 }
 
 variable postgres_servers {
@@ -73,5 +73,5 @@ variable common_keyvault {}
 variable common_keyvault_sync_identity {}
 
 variable controller_vm_size { default = "Standard_D2s_v3" }
-variable worker_vm_size { default = "Standard_D4s_v3" }
+variable worker_vm_size { default = "Standard_D4s_v4" }
 variable worker_count { default = 3 }
