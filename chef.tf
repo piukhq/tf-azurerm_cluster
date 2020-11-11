@@ -31,7 +31,8 @@ resource "chef_environment" "env" {
                 "vnet_resource_group" : azurerm_resource_group.rg.name,
                 "subnet_name" : azurerm_subnet.worker.name,
                 "security_group_name" : azurerm_network_security_group.worker_nsg.name,
-                "primary_availability_set_name" : azurerm_availability_set.worker.name,
+                "primary_availability_set_name" : var.use_scaleset ? "" : azurerm_availability_set.worker.name,
+                "primary_scale_set_name" : var.use_scaleset ? "${var.cluster_name}-vmss" : "",  # Cant ref here as its cyclic
                 "worker_cidr" : cidrsubnet(var.vnet_cidr, 2, 0)
             }
         }
