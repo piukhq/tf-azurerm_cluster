@@ -72,7 +72,7 @@ variable gitops_repo { type = string }
 variable common_keyvault {}
 variable common_keyvault_sync_identity {}
 
-variable controller_vm_size { default = "Standard_D2s_v3" }
+variable controller_vm_size { default = "Standard_D2as_v4" }
 variable worker_vm_size { default = "Standard_D4s_v4" }
 variable worker_count { default = 0 }
 variable worker_scaleset_size { default = 0 }
@@ -80,3 +80,5 @@ variable use_scaleset {
     type = bool
     default = false
 }
+
+variable controller_availability_set_id { type = string }
