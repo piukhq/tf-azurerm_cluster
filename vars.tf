@@ -80,5 +80,3 @@ variable use_scaleset {
     type = bool
     default = false
 }
-
-variable controller_availability_set_id { type = string }

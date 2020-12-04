@@ -24,7 +24,7 @@ resource "azurerm_linux_virtual_machine" "controller" {
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
     size = var.controller_vm_size
-    availability_set_id = var.controller_availability_set_id
+    # availability_set_id = var.controller_availability_set_id
 
     network_interface_ids = [
         azurerm_network_interface.controller.id
