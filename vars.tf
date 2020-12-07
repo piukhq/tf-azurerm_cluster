@@ -80,3 +80,4 @@ variable use_scaleset {
     type = bool
     default = false
 }
+variable prometheus_subnet { default = "10.4.0.0/18" }

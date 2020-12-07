@@ -143,7 +143,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
         source_port_range = "*"
         destination_port_range = 9100
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
-        source_address_prefix = "10.4.0.0/18"
+        source_address_prefix = var.prometheus_subnet
         direction = "Inbound"
         access = "Allow"
     }
@@ -261,7 +261,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
         source_port_range = "*"
         destination_port_range = 9100
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
-        source_address_prefix = "10.4.0.0/18"
+        source_address_prefix = var.prometheus_subnet
         direction = "Inbound"
         access = "Allow"
     }
