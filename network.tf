@@ -272,7 +272,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
         destination_port_range = 6443
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
-        source_address_prefix = "10.4.0.0/18"
+        source_address_prefix = var.prometheus_subnet
         direction = "Inbound"
         access = "Allow"
     }
