@@ -4,7 +4,7 @@ resource "chef_environment" "env" {
         bifrost = "= ${var.bifrost_version}"
         romanoff = ">= 2.0.2"
         fury = ">= 1.6.1"
-        nebula = "= 2.1.0"
+        nebula = "= 2.2.0"
     }
 
     default_attributes_json = jsonencode({
