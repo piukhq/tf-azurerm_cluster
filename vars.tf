@@ -37,7 +37,7 @@ variable additional_firewall_rules {
 
 variable bifrost_version {
     type = string
-    default = "4.6.0"
+    default = "4.6.3"
 }
 
 variable ubuntu_version {
