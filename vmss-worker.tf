@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
         }
     }
     zone_balance = true
-    zones = [1, 2]
+    zones = [1, 2, 3]
 
     // scale_in_policy = OldestVM - Default is the default, default maintains best zone coverage
 
