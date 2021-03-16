@@ -81,3 +81,8 @@ variable use_scaleset {
     default = false
 }
 variable prometheus_subnet { default = "10.4.0.0/18" }
+
+variable private_links {
+    type = list
+    default = []
+}

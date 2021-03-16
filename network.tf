@@ -32,6 +32,16 @@ resource "azurerm_subnet" "controller" {
     service_endpoints = []
 }
 
+resource "azurerm_subnet" "privatelink" {
+    name = "privatelink"
+    resource_group_name = azurerm_resource_group.rg.name
+    virtual_network_name = azurerm_virtual_network.vnet.name
+    enforce_private_link_endpoint_network_policies = true  # Variable should be called disable_private_link_endpoint_network_policies
+    address_prefixes = [
+        cidrsubnet(var.vnet_cidr, 8, 65)
+    ]
+}
+
 resource "azurerm_network_security_group" "worker_nsg" {
     name = "${var.cluster_name}-worker-nsg"
     location = azurerm_resource_group.rg.location
@@ -304,6 +314,61 @@ resource "azurerm_monitor_diagnostic_setting" "controller_nsg_eventhub" {
     }
 }
 
+resource "azurerm_network_security_group" "privatelink_nsg" {
+    name = "${var.cluster_name}-privatelink-nsg"
+    location = azurerm_resource_group.rg.location
+    resource_group_name = azurerm_resource_group.rg.name
+
+    security_rule {
+        name = "BlockEverything"
+        priority = 4096
+        protocol = "*"
+        access = "Deny"
+        source_port_range = "*"
+        destination_port_range = "*"
+        destination_address_prefix = "*"
+        source_address_prefix = "*"
+        direction = "Inbound"
+    }
+    security_rule {
+        name = "AllowAccessWorkers"
+        priority = 100
+        protocol = "TCP"
+        destination_port_range = "*"
+        source_port_range = "*"
+        destination_address_prefix = azurerm_subnet.privatelink.address_prefixes[0]
+        source_address_prefix = azurerm_subnet.worker.address_prefixes[0]
+        direction = "Inbound"
+        access = "Allow"
+    }
+
+    tags = var.tags
+}
+
+resource "azurerm_monitor_diagnostic_setting" "privatelink_nsg_eventhub" {
+    name = "binkuksouthlogs"
+    target_resource_id = azurerm_network_security_group.privatelink_nsg.id
+    eventhub_name = "azurensg"
+    eventhub_authorization_rule_id = var.eventhub_authid
+
+    log {
+        category = "NetworkSecurityGroupEvent"
+        enabled = true
+        retention_policy {
+            days = 0
+            enabled = false
+        }
+    }
+    log {
+        category = "NetworkSecurityGroupRuleCounter"
+        enabled = true
+        retention_policy {
+            days = 0
+            enabled = false
+        }
+    }
+}
+
 resource "azurerm_subnet_network_security_group_association" "worker_nsg_assoc" {
     subnet_id = azurerm_subnet.worker.id
     network_security_group_id = azurerm_network_security_group.worker_nsg.id
@@ -312,6 +377,11 @@ resource "azurerm_subnet_network_security_group_association" "worker_nsg_assoc" 
 resource "azurerm_subnet_network_security_group_association" "controller_nsg_assoc" {
     subnet_id = azurerm_subnet.controller.id
     network_security_group_id = azurerm_network_security_group.controller_nsg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "privatelink_nsg_assoc" {
+    subnet_id = azurerm_subnet.privatelink.id
+    network_security_group_id = azurerm_network_security_group.privatelink_nsg.id
 }
 
 resource "azurerm_route_table" "rt" {
