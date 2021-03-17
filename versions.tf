@@ -8,7 +8,7 @@ terraform {
         }
         commandpersistence = {
             source = "terrycain/commandpersistence"
-            version = "1.0.2"
+            version = "1.1.0"
         }
     }
     required_version = ">= 0.13"
