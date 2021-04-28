@@ -16,6 +16,7 @@ resource "chef_environment" "env" {
         },
         "flux" : {
             "repo" : var.gitops_repo,
+            "environment": replace(var.cluster_name, "/[0-9]+/", "")
         },
         "azure" : {
             "keyvault" : {
