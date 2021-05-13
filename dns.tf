@@ -31,7 +31,7 @@ resource "azurerm_dns_caa_record" "api_record" {
     record {
         flags = 0
         tag = "issue"
-        value = azurerm_dns_a_record.api_record.fqdn
+        value = "letsencrypt.org"
     }
 
     record {
@@ -68,7 +68,7 @@ resource "azurerm_dns_caa_record" "web_record" {
     record {
         flags = 0
         tag = "issue"
-        value = azurerm_dns_a_record.web_record.fqdn
+        value = "letsencrypt.org"
     }
 
     record {
@@ -105,7 +105,7 @@ resource "azurerm_dns_caa_record" "policies_record" {
     record {
         flags = 0
         tag = "issue"
-        value = azurerm_dns_a_record.policies_record.fqdn
+        value = "letsencrypt.org"
     }
 
     record {
@@ -142,7 +142,7 @@ resource "azurerm_dns_caa_record" "link_record" {
     record {
         flags = 0
         tag = "issue"
-        value = azurerm_dns_a_record.link_record.fqdn
+        value = "letsencrypt.org"
     }
 
     record {
