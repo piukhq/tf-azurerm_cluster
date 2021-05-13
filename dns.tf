@@ -179,7 +179,7 @@ resource "azurerm_dns_caa_record" "base_record" {
     record {
         flags = 0
         tag = "issue"
-        value = azurerm_dns_a_record.base_record.fqdn
+        value = "letsencrypt.org"
     }
 
     record {
