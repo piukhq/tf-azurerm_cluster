@@ -21,6 +21,8 @@ resource "azurerm_dns_a_record" "api_record" {
 }
 
 resource "azurerm_dns_caa_record" "api_record" {
+    provider = azurerm.core
+
     name = "api.${var.cluster_name}.uksouth"
     zone_name = var.public_dns["bink_sh"].dns_zone_name
     resource_group_name = var.public_dns["bink_sh"].resource_group_name
@@ -56,6 +58,8 @@ resource "azurerm_dns_a_record" "web_record" {
 }
 
 resource "azurerm_dns_caa_record" "web_record" {
+    provider = azurerm.core
+
     name = "web.${var.cluster_name}.uksouth"
     zone_name = var.public_dns["bink_sh"].dns_zone_name
     resource_group_name = var.public_dns["bink_sh"].resource_group_name
@@ -91,6 +95,8 @@ resource "azurerm_dns_a_record" "policies_record" {
 }
 
 resource "azurerm_dns_caa_record" "policies_record" {
+    provider = azurerm.core
+
     name = "policies.${var.cluster_name}.uksouth"
     zone_name = var.public_dns["bink_sh"].dns_zone_name
     resource_group_name = var.public_dns["bink_sh"].resource_group_name
@@ -126,6 +132,8 @@ resource "azurerm_dns_a_record" "link_record" {
 }
 
 resource "azurerm_dns_caa_record" "link_record" {
+    provider = azurerm.core
+
     name = "link.${var.cluster_name}.uksouth"
     zone_name = var.public_dns["bink_sh"].dns_zone_name
     resource_group_name = var.public_dns["bink_sh"].resource_group_name
@@ -161,6 +169,8 @@ resource "azurerm_dns_a_record" "base_record" {
 }
 
 resource "azurerm_dns_caa_record" "base_record" {
+    provider = azurerm.core
+
     name = "${var.cluster_name}.uksouth"
     zone_name = var.public_dns["bink_sh"].dns_zone_name
     resource_group_name = var.public_dns["bink_sh"].resource_group_name
