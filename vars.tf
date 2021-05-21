@@ -34,7 +34,6 @@ variable additional_firewall_rules {
     default = []
 }
 
-
 variable bifrost_version {
     type = string
     default = "4.6.3"
@@ -68,7 +67,8 @@ variable peers { type = map(object({
 # variable private_dns_link_bink_host { type = map(string) }
 # variable "private_dns_link_bink_sh" {}
 
-variable gitops_repo { type = string }
+variable flux_environment { type = string }
+
 variable common_keyvault {}
 variable common_keyvault_sync_identity {}
 
