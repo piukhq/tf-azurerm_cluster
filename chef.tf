@@ -12,7 +12,8 @@ resource "chef_environment" "env" {
             "api" : {
                 "host" : "${var.cluster_name}.uksouth.bink.sh",
                 "ipaddress" : cidrhost(cidrsubnet(var.vnet_cidr, 8, 64), 4)  # Removes depenency on subnet
-            }
+            },
+            "max_pods_per_host": var.max_pods_per_host
         },
         "flux" : {
             "environment": var.flux_environment

@@ -19,6 +19,11 @@ variable firewall { type = object({
     ingress_controller = number
 }) }
 
+variable max_pods_per_host {
+    type = number
+    default = 30
+}
+
 variable tcp_endpoint {
     type = bool
     default = false
