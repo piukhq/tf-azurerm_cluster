@@ -1,3 +1,8 @@
+locals {
+    # Want it starting at 1 and inclusive of the max_pods_per_host
+    pod_ip_range = range(1, var.max_pods_per_host + 1)
+}
+
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     name = "${var.cluster_name}-vmss"
     location = azurerm_resource_group.rg.location
@@ -66,7 +71,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
         }
 
         dynamic "ip_configuration" {
-            for_each = [for s in var.pod_ip_configs : {
+            for_each = [for s in local.pod_ip_range : {
                 name = format("vmss-pod-%02d", s)
             }]
 
