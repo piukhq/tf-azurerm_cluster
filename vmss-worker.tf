@@ -88,3 +88,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
         ]
     }
 }
+
+resource "azurerm_role_assignment" "vmss_iam" {
+    for_each = var.vmss_iam
+
+    scope = azurerm_linux_virtual_machine_scale_set.vmss.id
+    role_definition_name = each.value["role"]
+    principal_id = each.value["object_id"]
+}
+

@@ -91,3 +91,8 @@ variable private_links {
     type = list
     default = []
 }
+
+variable vmss_iam {
+    type = map(object({ object_id = string, role = string }))
+    default = {}
+}
