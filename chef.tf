@@ -34,7 +34,10 @@ resource "chef_environment" "env" {
                 "security_group_name" : azurerm_network_security_group.worker_nsg.name,
                 "primary_availability_set_name" : var.use_scaleset ? "" : azurerm_availability_set.worker.name,
                 "primary_scale_set_name" : var.use_scaleset ? "${var.cluster_name}-vmss" : "",  # Cant ref here as its cyclic
-                "worker_cidr" : cidrsubnet(var.vnet_cidr, 2, 0)
+                "worker_cidr" : cidrsubnet(var.vnet_cidr, 2, 0),
+                "location" : var.location,
+                "cluster_name" : var.cluster_name,
+                "port" : var.firewall.ingress_controller,
             }
         }
     })
