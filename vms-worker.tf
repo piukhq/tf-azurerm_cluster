@@ -100,8 +100,6 @@ resource "azurerm_linux_virtual_machine" "worker" {
         }
     }
 
-    custom_data = local.ubuntu_metadata[var.ubuntu_version]
-
     provisioner "remote-exec" {
         inline = [
             "sudo reboot"
@@ -120,40 +118,20 @@ resource "azurerm_linux_virtual_machine" "worker" {
         }
     }
 
-    # :( 20.04 with "dont use imds network config" takes longer to get an ip and be
-    # reachable, so the sleep reduces the number of tries the chef provisioner
-    # takes to connect
-    provisioner "local-exec" {
-        command = "echo 'Waiting for reboot' && sleep 60"
-    }
-
-    provisioner "chef" {
-        environment = chef_environment.env.name
-        client_options = ["chef_license 'accept'"]
-        run_list = ["role[worker]"]
-        node_name = self.name
-        server_url = "https://chef.uksouth.bink.sh:4444/organizations/bink"
-        recreate_client = true
-        user_name = "terraform"
-        user_key = file("chef.pem")
-        version = "16.5.64"
-        ssl_verify_mode = ":verify_peer"
-        secret_key = commandpersistence_cmd.databag_secret.result.secret
-
-        connection {
-            type = "ssh"
-            user = "terraform"
-            host = self.private_ip_address
-            private_key = file("~/.ssh/id_bink_azure_terraform")
-            bastion_host = "ssh.uksouth.bink.sh"
-            bastion_user = "terraform"
-            bastion_private_key = file("~/.ssh/id_bink_azure_terraform")
-        }
-    }
+    custom_data = base64gzip(
+        templatefile(
+            "${path.module}/scripts/init.tmpl",
+            {
+                cinc_run_list = base64encode(jsonencode({ "run_list" : ["role[worker]"] })),
+                cinc_data_secret = commandpersistence_cmd.databag_secret.result.secret,
+                cinc_environment = chef_environment.env.name
+            }
+        )
+    )
 
     lifecycle {
         ignore_changes = [
-            identity
+            identity,custom_data
         ]
     }
 }
