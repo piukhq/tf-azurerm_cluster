@@ -28,6 +28,12 @@ variable tcp_endpoint {
     type = bool
     default = false
 }
+
+variable cluster_ingress_subdomains {
+    type = list(string)
+    default = []
+}
+
 variable additional_firewall_rules {
     type = list(object({
         name = string
