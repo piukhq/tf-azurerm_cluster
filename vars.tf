@@ -5,6 +5,11 @@ variable tags { type = map(string) }
 variable vnet_cidr { type = string }
 variable eventhub_authid { type = string }
 
+variable postgres_flexible_server_dns_link { type = object({
+    name = string
+    resource_group_name = string
+}) }
+
 variable firewall { type = object({
     firewall_name = string
     resource_group_name = string
