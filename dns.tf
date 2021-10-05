@@ -87,3 +87,10 @@ resource "azurerm_dns_caa_record" "base_record" {
         value = "mailto:devops@bink.com"
     }
 }
+
+resource "azurerm_private_dns_zone_virtual_network_link" "pgfs" {
+    name = "private.postgres.database.azure.com-to-${azurerm_resource_group.rg.name}"
+    private_dns_zone_name = var.postgres_flexible_server_dns_link.name
+    virtual_network_id = azurerm_virtual_network.vnet.id
+    resource_group_name = var.postgres_flexible_server_dns_link.resource_group_name
+}
