@@ -448,7 +448,7 @@ resource "azurerm_lb_rule" "https" {
     frontend_port = 30001
     backend_port = 30001
     frontend_ip_configuration_name = "workers"
-    backend_address_pool_id = azurerm_lb_backend_address_pool.worker_pool.id
+    backend_address_pool_ids = [ azurerm_lb_backend_address_pool.worker_pool.id ]
     probe_id = azurerm_lb_probe.https.id
 }
 
@@ -467,7 +467,7 @@ resource "azurerm_lb_rule" "http" {
     frontend_port = 30000
     backend_port = 30000
     frontend_ip_configuration_name = "workers"
-    backend_address_pool_id = azurerm_lb_backend_address_pool.worker_pool.id
+    backend_address_pool_ids = [ azurerm_lb_backend_address_pool.worker_pool.id ]
     probe_id = azurerm_lb_probe.http.id
 }
 
@@ -487,7 +487,7 @@ resource "azurerm_lb_rule" "tcp" {
     frontend_port = 30002
     backend_port = 30002
     frontend_ip_configuration_name = "workers"
-    backend_address_pool_id = azurerm_lb_backend_address_pool.worker_pool.id
+    backend_address_pool_ids = [ azurerm_lb_backend_address_pool.worker_pool.id ]
     probe_id = azurerm_lb_probe.tcp[0].id
 }
 
