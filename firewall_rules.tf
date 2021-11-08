@@ -46,14 +46,6 @@ resource "azurerm_firewall_network_rule_collection" "egress" {
     priority = var.firewall.ingress_priority
     action = "Allow"
 
-    rule {
-        name = "Azure Redis"
-        source_addresses = [var.vnet_cidr]
-        destination_ports = ["6379", "6380"]
-        destination_addresses = ["*"]
-        protocols = ["TCP"]
-    }
-
     dynamic "rule" {
         for_each = var.additional_firewall_rules
         content {
