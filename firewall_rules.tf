@@ -37,7 +37,7 @@ resource "azurerm_firewall_nat_rule_collection" "ingress" {
 }
 
 resource "azurerm_firewall_network_rule_collection" "additional" {
-    count = var.additional_firewall_rules ? 1 : 0
+    count = var.additional_firewall_rules_enabled ? 1 : 0
     provider = azurerm.core
 
     name = "${var.cluster_name}-additional"

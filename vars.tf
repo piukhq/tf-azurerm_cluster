@@ -50,6 +50,11 @@ variable additional_firewall_rules {
     default = []
 }
 
+variable additional_firewall_rules_enabled {
+    type = bool
+    default = false
+}
+
 variable bifrost_version {
     type = string
     default = "4.6.3"
