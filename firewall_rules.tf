@@ -36,11 +36,11 @@ resource "azurerm_firewall_nat_rule_collection" "ingress" {
     }
 }
 
-# Shouldn't really be called egress
-resource "azurerm_firewall_network_rule_collection" "egress" {
+resource "azurerm_firewall_network_rule_collection" "additional" {
+    count = var.additional_firewall_rules ? 1 : 0
     provider = azurerm.core
 
-    name = "${var.cluster_name}-egress"
+    name = "${var.cluster_name}-additional"
     azure_firewall_name = var.firewall.firewall_name
     resource_group_name = var.firewall.resource_group_name
     priority = var.firewall.ingress_priority
