@@ -7,7 +7,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
     name = "${var.cluster_name}-vmss"
     location = azurerm_resource_group.rg.location
     resource_group_name = azurerm_resource_group.rg.name
-    upgrade_policy_mode = "Manual"
 
     sku = var.worker_vm_size
     instances = var.worker_scaleset_size
