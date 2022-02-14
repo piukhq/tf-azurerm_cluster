@@ -4,6 +4,7 @@ variable location { type = string }
 variable tags { type = map(string) }
 variable vnet_cidr { type = string }
 variable eventhub_authid { type = string }
+variable "log_analytics_workspace_id" { type = string }
 
 variable postgres_flexible_server_dns_link { type = object({
     name = string
