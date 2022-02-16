@@ -40,7 +40,7 @@ resource "azurerm_linux_virtual_machine" "controller" {
 
     os_disk {
         caching = "ReadOnly"
-        storage_account_type = "StandardSSD_LRS"
+        storage_account_type = var.controller_storage_type
         disk_size_gb = 32
     }
 

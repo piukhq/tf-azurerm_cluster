@@ -5,6 +5,10 @@ variable tags { type = map(string) }
 variable vnet_cidr { type = string }
 variable eventhub_authid { type = string }
 variable "log_analytics_workspace_id" { type = string }
+variable "controller_storage_type" {
+    type = string
+    default = "StandardSSD_ZRS"
+}
 
 variable postgres_flexible_server_dns_link { type = object({
     name = string
