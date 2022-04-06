@@ -457,6 +457,7 @@ resource "azurerm_lb" "lb" {
         private_ip_address_allocation = "Static"
         private_ip_address = cidrhost(azurerm_subnet.worker.address_prefixes[0], 4)
         subnet_id = azurerm_subnet.worker.id
+        zones = [ "1", "2", "3" ]
     }
 
     tags = var.tags
