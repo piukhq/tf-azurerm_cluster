@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "vnet" {
 resource "azurerm_monitor_diagnostic_setting" "vnet" {
     name = "diags"
     target_resource_id = azurerm_virtual_network.vnet.id
-    log_analytics_workspace_id = var.log_analytics_workspace_id
+    log_analytics_workspace_id = var.loganalytics_id
 
     log {
         category = "VMProtectionAlerts"
@@ -220,7 +220,7 @@ resource "azurerm_monitor_diagnostic_setting" "worker_nsg_eventhub" {
     target_resource_id = azurerm_network_security_group.worker_nsg.id
     eventhub_name = "azurensg"
     eventhub_authorization_rule_id = var.eventhub_authid
-    log_analytics_workspace_id = var.log_analytics_workspace_id
+    log_analytics_workspace_id = var.loganalytics_id
 
     log {
         category = "NetworkSecurityGroupEvent"
@@ -320,7 +320,7 @@ resource "azurerm_monitor_diagnostic_setting" "controller_nsg_eventhub" {
     target_resource_id = azurerm_network_security_group.controller_nsg.id
     eventhub_name = "azurensg"
     eventhub_authorization_rule_id = var.eventhub_authid
-    log_analytics_workspace_id = var.log_analytics_workspace_id
+    log_analytics_workspace_id = var.loganalytics_id
 
     log {
         category = "NetworkSecurityGroupEvent"
@@ -376,7 +376,7 @@ resource "azurerm_monitor_diagnostic_setting" "privatelink_nsg_eventhub" {
     target_resource_id = azurerm_network_security_group.privatelink_nsg.id
     eventhub_name = "azurensg"
     eventhub_authorization_rule_id = var.eventhub_authid
-    log_analytics_workspace_id = var.log_analytics_workspace_id
+    log_analytics_workspace_id = var.loganalytics_id
 
     log {
         category = "NetworkSecurityGroupEvent"
