@@ -96,7 +96,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowSSH"
         priority = 500
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = 22
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -129,7 +129,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowHttpTrafficFromLoadbalancer"
         priority = 120
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 30000
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -140,7 +140,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowHttpsTrafficFromLoadbalancer"
         priority = 130
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 30001
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -151,7 +151,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowHttpTrafficFromFirewall"
         priority = 140
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 30000
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -162,7 +162,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowHttpsTrafficFromFirewall"
         priority = 150
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 30001
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -173,7 +173,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
     security_rule {
         name = "AllowPrometheusNodeExporter"
         priority = 160
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 9100
         destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -187,7 +187,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
         content {
             name = "AllowTCPTrafficFromFirewall"
             priority = 170
-            protocol = "TCP"
+            protocol = "Tcp"
             source_port_range = "*"
             destination_port_range = 30002
             destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -202,7 +202,7 @@ resource "azurerm_network_security_group" "worker_nsg" {
         content {
             name = "AllowTCPTrafficFromLoadbalancer"
             priority = 171
-            protocol = "TCP"
+            protocol = "Tcp"
             source_port_range = "*"
             destination_port_range = 30002
             destination_address_prefix = azurerm_subnet.worker.address_prefixes[0]
@@ -259,7 +259,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
     security_rule {
         name = "AllowSSH"
         priority = 500
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = 22
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
@@ -270,7 +270,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
     security_rule {
         name = "AllowKubeAPIAccessWorkers"
         priority = 100
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = 6443
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
@@ -281,7 +281,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
     security_rule {
         name = "AllowKubeAPIAccessExternal"
         priority = 110
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = 6443
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
@@ -292,7 +292,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
     security_rule {
         name = "AllowPrometheusNodeExporter"
         priority = 120
-        protocol = "TCP"
+        protocol = "Tcp"
         source_port_range = "*"
         destination_port_range = 9100
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
@@ -303,7 +303,7 @@ resource "azurerm_network_security_group" "controller_nsg" {
     security_rule {
         name = "AllowPrometheusToKubeAPI"
         priority = 130
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = 6443
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.controller.address_prefixes[0]
@@ -359,7 +359,7 @@ resource "azurerm_network_security_group" "privatelink_nsg" {
     security_rule {
         name = "AllowAccessWorkers"
         priority = 100
-        protocol = "TCP"
+        protocol = "Tcp"
         destination_port_range = "*"
         source_port_range = "*"
         destination_address_prefix = azurerm_subnet.privatelink.address_prefixes[0]
