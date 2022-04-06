@@ -468,7 +468,6 @@ resource "azurerm_lb_backend_address_pool" "worker_pool" {
 }
 
 resource "azurerm_lb_rule" "https" {
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "HTTPS"
     protocol = "Tcp"
@@ -480,14 +479,12 @@ resource "azurerm_lb_rule" "https" {
 }
 
 resource "azurerm_lb_probe" "https" {
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "https-probe"
     port = 30001
 }
 
 resource "azurerm_lb_rule" "http" {
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "HTTP"
     protocol = "Tcp"
@@ -499,7 +496,6 @@ resource "azurerm_lb_rule" "http" {
 }
 
 resource "azurerm_lb_probe" "http" {
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "http-probe"
     port = 30000
@@ -507,7 +503,6 @@ resource "azurerm_lb_probe" "http" {
 
 resource "azurerm_lb_rule" "tcp" {
     count = var.tcp_endpoint ? 1 : 0
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "TCP"
     protocol = "Tcp"
@@ -520,7 +515,6 @@ resource "azurerm_lb_rule" "tcp" {
 
 resource "azurerm_lb_probe" "tcp" {
     count = var.tcp_endpoint ? 1 : 0
-    resource_group_name = azurerm_resource_group.rg.name
     loadbalancer_id = azurerm_lb.lb.id
     name = "tcp-probe"
     port = 30002
