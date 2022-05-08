@@ -84,7 +84,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
 
     lifecycle {
         ignore_changes = [
-            identity
+            identity,
+            custom_data
         ]
     }
 }
