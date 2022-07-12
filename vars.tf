@@ -3,7 +3,6 @@ variable cluster_name { type = string }
 variable location { type = string }
 variable tags { type = map(string) }
 variable vnet_cidr { type = string }
-variable eventhub_authid { type = string }
 variable "loganalytics_id" { type = string }
 variable "controller_storage_type" {
     type = string
