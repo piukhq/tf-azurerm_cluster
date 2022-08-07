@@ -100,9 +100,6 @@ variable subscription_peers { type = map(object({
 
 variable flux_environment { type = string }
 
-variable common_keyvault {}
-variable common_keyvault_sync_identity {}
-
 variable controller_vm_size { default = "Standard_D2as_v4" }
 variable worker_vm_size { default = "Standard_D4s_v4" }
 variable worker_count { default = 0 }

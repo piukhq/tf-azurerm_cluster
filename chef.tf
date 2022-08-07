@@ -19,11 +19,6 @@ resource "chef_environment" "env" {
             "environment": var.flux_environment
         },
         "azure" : {
-            "keyvault" : {
-                "url" : var.common_keyvault.url,
-                "resource_id" : var.common_keyvault_sync_identity.resource_id,
-                "client_id" : var.common_keyvault_sync_identity.client_id
-            },
             "config" : {
                 "subscription_id" : data.azurerm_subscription.current.subscription_id,
                 "resource_group" : azurerm_resource_group.rg.name,
